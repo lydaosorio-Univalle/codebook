@@ -31,7 +31,7 @@ dengue <- dengue |>
     sexo_     = as.character(sexo_),
     edad_     = as.numeric(edad_),
     uni_med_  = as.numeric(uni_med_),
-    ini_sin_  = as.Date(ini_sin_),
+    ini_sin_  = as.Date(ini_sin_, format = '%d/%m/%Y'),
     tip_cas_  = as.numeric(tip_cas_),
     clasfinal = as.numeric(clasfinal),
     
