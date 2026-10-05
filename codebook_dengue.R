@@ -16,10 +16,12 @@ library(labelled)
 library(tidyverse)
 install.packages("writexl")
 library(writexl)
+install.packages("lubridate")
+library(lubridate)
 
 # 1. Importar la base e identificar las variables
 dengue <- read.csv("dengue_sivigila.csv")
-view(dengue)
+glimpse(dengue)
 
 # 2. Asegurar el formato correcto de cada variable
 # ¿Cuál es la importancia de este paso?
@@ -31,8 +33,7 @@ dengue <- dengue |>
     sexo_     = as.character(sexo_),
     edad_     = as.numeric(edad_),
     uni_med_  = as.numeric(uni_med_),
-    ini_sin_  = as.Date(ini_sin_, format = '%d/%m/%Y'),
-    tip_cas_  = as.numeric(tip_cas_),
+        tip_cas_  = as.numeric(tip_cas_),
     clasfinal = as.numeric(clasfinal),
     
   )
@@ -43,12 +44,9 @@ glimpse(dengue)
 #¿qué estructura de fecha tiene la variable ini_sin?
 
 dengue <- dengue %>%
-  mutate(ini_sin_formateada = format(ini_sin_, "%d-%b-%Y"))
+ mutate(ini_sin_formateada = dmy(ini_sin_))
 
-# %d: Día en dos dígitos (ej. 09).
-# %b: Mes abreviado en letras (ej. ene).
-# %Y: Año completo en cuatro dígitos (ej. 2010).
-
+class(dengue$ini_sin_formateada)
 glimpse(dengue$ini_sin_formateada)
 
 # ¿que significa NA en clasfinal? ¿Que notan del formato de esta variable?
